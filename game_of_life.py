@@ -8,10 +8,8 @@ rank = comm.Get_rank()
 stat = MPI.Status()
 
 # Set global variables
-#COLS = 400
-#ROWS = 198
-COLS = 20
-ROWS = 10
+COLS = 400
+ROWS = 198
 
 if size > ROWS:
         print("Not enough ROWS")
@@ -74,9 +72,7 @@ subGrid = comm.scatter(M, root=0)
 
 # The main body of the algorithm
 #compute new grid and pass rows to neighbors
-generations = 6
-ims=[]
-fig = plt.figure()
+generations = 600
 
 for i in xrange(generations):
 	computeGridPoints(subGrid)
@@ -95,5 +91,5 @@ Grid=comm.gather(subGrid[1:subROWS-1,:],root=0)
 if rank == 0:
 	result= numpy.vstack(Grid)
 #	print numpy.vstack(initGrid)
-	print result[:]
+	print(result[:])
 #	print len(result)
